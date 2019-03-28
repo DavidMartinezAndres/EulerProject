@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 
 namespace EulerProject
@@ -15,8 +16,9 @@ namespace EulerProject
             //int ex5 = smallestMultiple();
             //int ex6 = squareDiff();
             //int ex7 = getPrime(10001);
-            long ex10 = largestProduct(2000000);
-            Console.Write("ex8: "+ex10);
+            //long ex10 = largestProduct(2000000);
+            int ex13 = collatz(1000000);
+            Console.Write("ex13: "+ex13);
  
         }
 
@@ -170,7 +172,7 @@ namespace EulerProject
         }
 
         //10-Summation of primes
-        private static long largestProduct(long limit)
+        static long largestProduct(long limit)
         {
             long number = 0;
             long result = 0;
@@ -193,6 +195,48 @@ namespace EulerProject
             }
             return result;
         }
+
+        //14-Longest Collatz sequence
+
+        static int collatz(int limit)
+        {
+            int result = 0;
+            long maxSequence = 0;
+            for (int i = 1; i < limit; i++)
+            {
+                Console.WriteLine("i: " + i);
+                long ae = collatzSequenceLength(i);
+                if (ae > maxSequence)   
+                {
+                    maxSequence = ae;
+                    result = i;
+                }
+            }
+            return result;
+        }
+        static int collatzSequenceLength(long number)
+        {
+            long orig = number;
+            Console.WriteLine("ha entrao: " + number);
+            int count = 0;
+            while (number != 1)
+            {
+                if (orig == 113383)
+                {
+                    Console.WriteLine("ae: " + number);
+                }
+                if (number %2 == 0) {
+                    number /= 2;
+                } else {
+                    number = number * 3 + 1;
+                }
+                count++;
+            }
+
+
+            return count;
+        }
+
             
        
         }
