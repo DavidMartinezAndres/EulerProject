@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Numerics;
 
 namespace EulerProject
 {
@@ -9,16 +9,17 @@ namespace EulerProject
 
         static void Main(string[] args)
         {
-            //int ex1 = getMultiples(3, 5);
-            //int ex2 = getFibonacci();
-            //long ex3 = getHigherPrime(600851475143);
-            //int ex4 = getLargestPalindrome();
-            //int ex5 = smallestMultiple();
-            //int ex6 = squareDiff();
-            //int ex7 = getPrime(10001);
-            //long ex10 = largestProduct(2000000);
-            int ex13 = collatz(1000000);
-            Console.Write("ex13: "+ex13);
+            //int ex1 = GetMultiples(3, 5);
+            //int ex2 = GetFibonacci();
+            //long ex3 = GetHigherPrime(600851475143);
+            //int ex4 = GetLargestPalindrome();
+            //int ex5 = SmallestMultiple();
+            //int ex6 = SquareDiff();
+            //int ex7 = GetPrime(10001);
+            //long ex10 = LargestProduct(2000000);
+            //int ex13 = Collatz(1000000);
+            BigInteger ex16 = SumNumbers(2,1000);
+            Console.Write("ex16: "+ex16.ToString());
  
         }
 
@@ -30,7 +31,7 @@ namespace EulerProject
         }
 
         //1- Multiples of 3 and 5
-        static int getMultiples(int a, int b)
+        static int GetMultiples(int a, int b)
         {
             int TotalSum = 0;
             for (int i = 0; i < 1000; i++)
@@ -44,7 +45,7 @@ namespace EulerProject
         }
 
         //2- Even Fibonacci numbers
-        static int getFibonacci()
+        static int GetFibonacci()
         {
             int firstNumber = 1;
             int secondNumber = 2;
@@ -66,7 +67,7 @@ namespace EulerProject
         }
 
         //3- Largest prime factor
-        static long getHigherPrime(long num)
+        static long GetHigherPrime(long num)
         {
             long higherPrime = 0;
             long x = num;
@@ -85,7 +86,7 @@ namespace EulerProject
         }
 
         //4- Largest palindrome product
-        static int getLargestPalindrome()
+        static int GetLargestPalindrome()
         {
             int result = 0;
             for (int i = 100; i < 1000; i++)
@@ -103,7 +104,7 @@ namespace EulerProject
         }
 
         //5- smallest multiple
-        static int smallestMultiple()
+        static int SmallestMultiple()
         {
             bool found = false;
             int limit = 20;
@@ -125,15 +126,15 @@ namespace EulerProject
         }
 
         //6-Sum square difference
-        static int squareDiff()
+        static int SquareDiff()
         {
             int maxNumber = 100;
-            int a = squareSums(maxNumber);
+            int a = SquareSums(maxNumber);
             int b = sumSquares(maxNumber);
             return a-b;
         }
 
-        private static int squareSums(int maxNumber)
+        private static int SquareSums(int maxNumber)
         {
             for (int i = maxNumber - 1; i > 0; i--)
             {
@@ -152,7 +153,7 @@ namespace EulerProject
         }
 
         //7-10001st prime
-        static int getPrime(int countWanted)
+        static int GetPrime(int countWanted)
         {
             int number = 2;
             int count = 0;
@@ -172,7 +173,7 @@ namespace EulerProject
         }
 
         //10-Summation of primes
-        static long largestProduct(long limit)
+        static long LargestProduct(long limit)
         {
             long number = 0;
             long result = 0;
@@ -197,15 +198,13 @@ namespace EulerProject
         }
 
         //14-Longest Collatz sequence
-
-        static int collatz(int limit)
+        static int Collatz(int limit)
         {
             int result = 0;
             long maxSequence = 0;
             for (int i = 1; i < limit; i++)
             {
-                Console.WriteLine("i: " + i);
-                long ae = collatzSequenceLength(i);
+                long ae = CollatzSequenceLength(i);
                 if (ae > maxSequence)   
                 {
                     maxSequence = ae;
@@ -214,17 +213,13 @@ namespace EulerProject
             }
             return result;
         }
-        static int collatzSequenceLength(long number)
+        static int CollatzSequenceLength(long number)
         {
             long orig = number;
-            Console.WriteLine("ha entrao: " + number);
+            
             int count = 0;
             while (number != 1)
             {
-                if (orig == 113383)
-                {
-                    Console.WriteLine("ae: " + number);
-                }
                 if (number %2 == 0) {
                     number /= 2;
                 } else {
@@ -235,6 +230,31 @@ namespace EulerProject
 
 
             return count;
+        }
+
+        //16- Power digit sum
+        static BigInteger SumNumbers(uint number,int potency)
+        {
+
+            BigInteger numberPower = GetPowerSum(number, potency);
+            char[] fragmentedNumber = numberPower.ToString().ToCharArray();
+            BigInteger result = 0;
+            foreach (char c in fragmentedNumber)
+            {
+                result += uint.Parse(c.ToString());
+            }
+            return result;
+        }
+        static BigInteger GetPowerSum(uint number, int potency)
+        {
+
+
+            BigInteger result = 1;
+            for (int i = 0; i < potency; i++)
+            {
+                result *= number;
+            }
+            return result;
         }
 
             
