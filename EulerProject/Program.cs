@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+
 
 namespace EulerProject
 {
@@ -15,8 +15,8 @@ namespace EulerProject
             //int ex5 = smallestMultiple();
             //int ex6 = squareDiff();
             //int ex7 = getPrime(10001);
-            int ex8 = largestProduct();
-            Console.Write("ex8: "+ex8);
+            long ex10 = largestProduct(2000000);
+            Console.Write("ex8: "+ex10);
  
         }
 
@@ -169,10 +169,32 @@ namespace EulerProject
             return number;
         }
 
-        //8-Largest product in a series
-        private static int largestProduct()
+        //10-Summation of primes
+        private static long largestProduct(long limit)
         {
-            return 0;
+            long number = 0;
+            long result = 0;
+            for (long i = 0; i < limit; i++)
+            {
+                if (number == 1) { number++; continue; }
+                
+                bool isPrime = true;
+                for (long j = 2; j < number; j++)
+                {
+                
+                    if (number % j == 0) { isPrime = false; break; }
+                }
+                if (isPrime) {
+                    result += number;
+                  //  Console.Write("number: "+number+" suma: " + result);
+                }
+                
+                number++;
+            }
+            return result;
+        }
+            
+       
         }
     }
-}
+
