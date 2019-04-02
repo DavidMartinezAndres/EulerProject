@@ -12,7 +12,7 @@ namespace EulerProject
         {
             //int ex1 = GetMultiples(3, 5);
             //int ex2 = GetFibonacci();
-            //long ex3 = GetHigherPrime(600851475143);
+            //long ex3 = GetHigherPrime(13195);
             //int ex4 = GetLargestPalindrome();
             //int ex5 = SmallestMultiple();
             //int ex6 = SquareDiff();
@@ -20,8 +20,9 @@ namespace EulerProject
             //long ex10 = LargestProduct(2000000);
             //int ex13 = Collatz(1000000);
             //BigInteger ex16 = SumNumbers(2,1000);
-            BigInteger ex20 = FactorialDigitSum(100);
-            Console.Write("ex20: "+ex20.ToString());
+            //BigInteger ex20 = FactorialDigitSum(100);
+            double ex30 = DigitFifthPower(); 
+            Console.Write("ex30: "+ex30.ToString());
  
         }
 
@@ -76,7 +77,6 @@ namespace EulerProject
 
             for (long i = 1; i < num / 2; i++)
             {
- 
                 if (x % i == 0)
                 {
                     higherPrime = i;
@@ -264,20 +264,36 @@ namespace EulerProject
         static BigInteger FactorialDigitSum(BigInteger baseNumber)
         {
             BigInteger factorial = 1;
-            for (long i = 1; i <= baseNumber; i++)
-            {
-                factorial *= i;
-                
-            }
-            Console.WriteLine("ae: "+ factorial.ToString());
+            for (long i = 1; i <= baseNumber; i++) { factorial *= i; }
 
             int [] digitsToSum = factorial.ToString().ToCharArray().Select(x => (int)Char.GetNumericValue(x) ).ToArray();
             long result = 0;
-            for (int i = 0; i < digitsToSum.Length; i++)
-            {
-                result += digitsToSum[i];
-            }
+
+            for (int i = 0; i < digitsToSum.Length; i++) { result += digitsToSum[i]; }
+
             return result;
+        }
+
+
+        //30 Digit fifth powers
+        static double DigitFifthPower()
+        {
+            double finalResult = 0;
+            for (int i = 11; i < 999999; i++)
+            {
+                int[] digits = i.ToString().ToCharArray().Select(x => (int)Char.GetNumericValue(x)).ToArray();
+                double ae = 0;
+                foreach (int j in digits)
+                {
+                    ae += Math.Pow(j,5);
+                }
+                if (i==ae)
+                {
+                    Console.WriteLine("ae: " + i);
+                    finalResult += ae;
+                }
+            }
+            return finalResult;
         }
 
             
