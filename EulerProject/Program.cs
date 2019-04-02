@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 
 namespace EulerProject
@@ -18,8 +19,9 @@ namespace EulerProject
             //int ex7 = GetPrime(10001);
             //long ex10 = LargestProduct(2000000);
             //int ex13 = Collatz(1000000);
-            BigInteger ex16 = SumNumbers(2,1000);
-            Console.Write("ex16: "+ex16.ToString());
+            //BigInteger ex16 = SumNumbers(2,1000);
+            BigInteger ex20 = FactorialDigitSum(100);
+            Console.Write("ex20: "+ex20.ToString());
  
         }
 
@@ -228,8 +230,8 @@ namespace EulerProject
                 count++;
             }
 
-
             return count;
+
         }
 
         //16- Power digit sum
@@ -253,6 +255,27 @@ namespace EulerProject
             for (int i = 0; i < potency; i++)
             {
                 result *= number;
+            }
+            return result;
+        }
+
+        //20- Factorial digit sum
+
+        static BigInteger FactorialDigitSum(BigInteger baseNumber)
+        {
+            BigInteger factorial = 1;
+            for (long i = 1; i <= baseNumber; i++)
+            {
+                factorial *= i;
+                
+            }
+            Console.WriteLine("ae: "+ factorial.ToString());
+
+            int [] digitsToSum = factorial.ToString().ToCharArray().Select(x => (int)Char.GetNumericValue(x) ).ToArray();
+            long result = 0;
+            for (int i = 0; i < digitsToSum.Length; i++)
+            {
+                result += digitsToSum[i];
             }
             return result;
         }
